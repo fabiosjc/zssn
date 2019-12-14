@@ -1,5 +1,6 @@
 {
   "name": "zssn",
+  "description": "A React project to build the ZSSN (Zombie Survival Social Network)",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
