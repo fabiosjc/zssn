@@ -66,10 +66,29 @@ The trades themselves won't be stored by the API, but the items will be transfer
 
 The interface will must show the following reports, served by the API:
 
-Percentage of infected survivors.
-Percentage of non-infected survivors.
-Average amount of each kind of resource by survivor (e.g. 5 waters per survivor)
-Points lost because of infected survivor.
+1. Percentage of infected survivors.
+2. Percentage of non-infected survivors.
+3. Average amount of each kind of resource by survivor (e.g. 5 waters per survivor)
+4. Points lost because of infected survivor.
+
+---
+
+## REST API
+
+To communicate with the server you'll have available the endpoints documented in this swagger: http://zssn-backend-example.herokuapp.com/swagger-api/index.html
+
+## Notes:
+
+1. You can use any JavaScript framework/lib of your preference if needed;
+2. You can use an ES6 or CoffeeScript transpiler if you prefer;
+3. You can use CSS precompilers, like SASS, PostCSS, Less or Stylus, again, if you prefer;
+4. Pretty design is nice to have, but minimal UX is more important. Your life is in risk, it's not good to have a system that is hard to use;
+5. New features are welcome, but the priority is the previous listed features, sorted by importance;
+6. The survivor should not reenter data in case there's some network problem. Practicity and objectivity is the ideal.
+
+**Important**: For the evaluation keep this in mind: you don't need to complete every single feature listed in this test (consuming every single API in the documentation). For example, you can implement just the Survivor CRUD interface. But the less features you implement, the more you have to nail what you deliver. So, if you deliver just 1 feature, we expect it to be the most perfect implementation (structure, organization, testing, style, overall quality, fanciness, etc). The more feature you deliver, the less details you have to add. It's your choice.
+
+**ARE YOU NEGAN?**
 
 ---
 
