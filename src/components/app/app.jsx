@@ -1,13 +1,23 @@
 import React from 'react';
-import './app.css';
-import Header from './header';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { ThemeProvider } from '@material-ui/styles';
+import Routes from '../../routes';
+import theme from '../../theme';
+import '../../assets/sass/index.scss';
 
-function App() {
+import './app.css';
+
+const browserHistory = createBrowserHistory();
+
+const App = () => {
   return (
-    <div className="app">
-      <Header />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Router history={browserHistory}>
+        <Routes />
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
