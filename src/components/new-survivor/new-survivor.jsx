@@ -5,6 +5,7 @@ import SurvivorProfile from './survivor-profile';
 import ResistenceForm from './resistence-form';
 import { SurvivorProvider } from './survivor-context';
 import { set } from 'lodash';
+import LoadingOverlay from 'react-loading-overlay';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,31 +37,42 @@ const NewSurvivor = () => {
   const classes = useStyles();
 
   const [survivor, setSurvivor] = useState(newSurvivor);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = event => {
-    const path = event.target.name;
-    const obj = set({ ...survivor }, path, event.target.value);
-    console.log(obj);
+    const obj = set({ ...survivor }, event.target.name, event.target.value);
     setSurvivor(obj);
   };
 
+  const handleLoading = isLoading => {
+    setIsLoading(isLoading);
+  };
+
   return (
-    <div id="new-survivor" className={classes.root}>
-      <SurvivorProvider value={survivor}>
-        <Grid container spacing={4}>
-          <Grid item lg={7} md={6} xl={8} xs={12}>
-            <ResistenceForm
-              id="resistence-form"
-              survivor={survivor}
-              onChange={handleChange}
-            />
+    <LoadingOverlay
+      active={isLoading}
+      spinner
+      text="Loading..."
+      className="height-100 overflow-hidden"
+    >
+      <div id="new-survivor" className={classes.root}>
+        <SurvivorProvider value={survivor}>
+          <Grid container spacing={4}>
+            <Grid item lg={7} md={6} xl={8} xs={12}>
+              <ResistenceForm
+                id="resistence-form"
+                survivor={survivor}
+                onChange={handleChange}
+                showLoading={handleLoading}
+              />
+            </Grid>
+            <Grid item lg={5} md={6} xl={4} xs={12}>
+              <SurvivorProfile survivor={survivor} />
+            </Grid>
           </Grid>
-          <Grid item lg={5} md={6} xl={4} xs={12}>
-            <SurvivorProfile survivor={survivor} />
-          </Grid>
-        </Grid>
-      </SurvivorProvider>
-    </div>
+        </SurvivorProvider>
+      </div>
+    </LoadingOverlay>
   );
 };
 

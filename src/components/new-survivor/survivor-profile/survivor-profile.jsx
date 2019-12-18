@@ -52,7 +52,7 @@ const SurvivorProfile = props => {
                 </Grid>
 
                 <Grid item md={6} xs={12}>
-                  Age {survivor.age}
+                  Age: {survivor.age}
                 </Grid>
 
                 <Grid item md={6} xs={12}>
@@ -69,11 +69,13 @@ const SurvivorProfile = props => {
                 </Grid>
 
                 <Grid item md={12} xs={12}>
-                  Last Postion (lat, lon):{' '}
-                  {formatLatLon(
-                    survivor.location.latitude,
-                    survivor.location.longitude
-                  )}
+                  <span title="Last position (lat, lon)">
+                    Last Postion:{' '}
+                    {formatLatLon(
+                      survivor.location.latitude,
+                      survivor.location.longitude
+                    )}
+                  </span>
                 </Grid>
               </Grid>
               <Avatar className={classes.avatar} src={survivor.avatar} />

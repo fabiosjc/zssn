@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 import clsx from 'clsx';
 import {
   Card,
@@ -21,6 +21,12 @@ import InventoryForm from '../inventory-form';
 import SecurityIcon from '@material-ui/icons/Security';
 import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
 import axios from 'axios';
+import { values } from 'lodash';
+import 'react-notifications/lib/notifications.css';
+import {
+  NotificationContainer,
+  NotificationManager,
+} from 'react-notifications';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -51,7 +57,6 @@ const ResistenceForm = props => {
   };
 
   const onSave = event => {
-    // console.log(JSON.stringify(survivor));
     event.preventDefault();
     const person = {
       name: survivor.name,
@@ -61,30 +66,38 @@ const ResistenceForm = props => {
       items: getParsedInventory(survivor.inventory),
     };
 
+    if (!inventoryHasItems(survivor.inventory)) {
+      NotificationManager.warning(
+        'Inventory has no items',
+        'Help in trading items'
+      );
+      return;
+    }
+
+    props.showLoading(true);
     axios
       .post('http://zssn-backend-example.herokuapp.com/api/people.json', person)
       .then(
         result => {
-          // this.setState({
-          //   isLoaded: true,
-          //   items: result.items,
-          // });
-          //TODO usar componente de notificação
-          alert(
-            `Congratulations! You a new member from resistence. You resistance-number is: ${result.data.id}`
+          NotificationManager.success(
+            `Your resistance-number is: ${result.data.id}`,
+            'Congratulations!'
           );
         },
         error => {
-          //TODO usar componente de notificação
-          alert(
-            `Error saving record. Please try again at another moment. ${error.message}`
+          NotificationManager.error(
+            `Error: ${error.response.data}`,
+            `Error saving record`
           );
-          // this.setState({
-          //   isLoaded: true,
-          //   error,
-          // });
         }
-      );
+      )
+      .finally(() => {
+        props.showLoading(false);
+      });
+  };
+
+  const inventoryHasItems = inventory => {
+    return values(inventory).some(item => item !== undefined);
   };
 
   return (
@@ -140,15 +153,15 @@ const ResistenceForm = props => {
                       row
                     >
                       <FormControlLabel
-                        value="F"
-                        control={<Radio />}
-                        label="Female"
-                        labelPlacement="end"
-                      />
-                      <FormControlLabel
                         value="M"
                         control={<Radio />}
                         label="Male"
+                        labelPlacement="end"
+                      />
+                      <FormControlLabel
+                        value="F"
+                        control={<Radio />}
+                        label="Female"
                         labelPlacement="end"
                       />
                     </RadioGroup>
@@ -191,10 +204,11 @@ const ResistenceForm = props => {
             <Divider />
             <CardActions>
               <Button color="primary" variant="contained" type="submit">
-                Save details
+                Save
               </Button>
             </CardActions>
           </form>
+          <NotificationContainer leaveTimeout={1500} />
         </Card>
       )}
     </SurvivorConsumer>

@@ -32,7 +32,6 @@ const InventoryForm = props => {
         <FormControl>
           <InputLabel htmlFor="water">Water *</InputLabel>
           <Input
-            required
             id="water"
             name="inventory.water"
             type="number"
@@ -50,7 +49,6 @@ const InventoryForm = props => {
         <FormControl>
           <InputLabel htmlFor="food">Food *</InputLabel>
           <Input
-            required
             id="food"
             name="inventory.food"
             type="number"
@@ -68,7 +66,6 @@ const InventoryForm = props => {
         <FormControl>
           <InputLabel htmlFor="medication">Medication *</InputLabel>
           <Input
-            required
             id="medication"
             name="inventory.medication"
             type="number"
@@ -86,7 +83,6 @@ const InventoryForm = props => {
         <FormControl>
           <InputLabel htmlFor="ammunition">Ammunition *</InputLabel>
           <Input
-            required
             id="ammunition"
             name="inventory.ammunition"
             type="number"
