@@ -5,26 +5,30 @@
   ✔ Add linter @done(19-12-17 21:06)
   ✔ Add prettier @done(19-12-17 21:06)
   ✔ Add coverage @done(19-12-17 21:06)
+  ✔ Create layout with navigation @done(19-12-22 00:22)
 
-# Add survivors to the database:
-  ✔ [Requirement] Should save a new survivor @done(19-12-17 21:07)
-  ✔ Change validation from inventory fields. Should use a 'at least one' validation. @done(19-12-17 23:00)
-  ✔ Use notification on save/error @done(19-12-17 23:00)
-  ☐ [Improvement] Clear form after save
-  ☐ [Improvement] Use a map to register lat/lon
-  ☐ [Improvement] Add position image to last position field
+# Survivor Module  
+  # Add survivors to the database:
+    ✔ [Requirement] Should save a new survivor @done(19-12-17 21:07)
+    ✔ Change validation from inventory fields. Should use a 'at least one' validation. @done(19-12-17 23:00)
+    ✔ Use notification on save/error @done(19-12-17 23:00)
+    ☐ [Improvement] Clear form after save
+    ☐ [Improvement] Use a map to register lat/lon
+    ☐ [Improvement] Add position image to last position field
 
-# Update survivor location:
-  ☐ [Requirement] Should update survivor location
+  # Update survivor location:
+    ☐ [Requirement] Should update survivor location
 
-# Flag survivor as infected:
-  ☐ [Requirement] Flag survivor as infected
+  # Flag survivor as infected:
+    ☐ [Requirement] Flag survivor as infected
 
-# Survivors cannot Add/Remove items from inventory:
-  ☐ [Requirement] Survivors cannot Add/Remove items from inventory
+  # Survivors cannot Add/Remove items from inventory:
+    ☐ [Requirement] Survivors cannot Add/Remove items from inventory
 
-# Trade items:
-  ☐ [Requirement] Trade items
+# Trade Module
+  # Trade items:
+    ☐ [Requirement] Trade items
 
-# Reports:
-  ☐ [Requirement] Create report/dashboard
+# Reports Module
+  # Reports:
+    ☐ [Requirement] Create report/dashboard

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Card,
   CardContent,
@@ -16,7 +16,7 @@ import GavelIcon from '@material-ui/icons/Gavel';
 
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
+import { SurvivorConsumer } from '../survivor-context';
 
 const useStyles = makeStyles(theme => ({
   root: {},
