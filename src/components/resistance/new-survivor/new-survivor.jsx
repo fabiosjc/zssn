@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import SurvivorProfile from './survivor-profile';
-import ResistenceForm from './resistence-form';
+import ResistanceForm from './resistance-form';
 import { SurvivorProvider } from './survivor-context';
-import { set } from 'lodash';
+import { set, cloneDeep } from 'lodash';
 import LoadingOverlay from 'react-loading-overlay';
 
 const useStyles = makeStyles(theme => ({
@@ -14,24 +14,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const newSurvivor = {
-  name: undefined,
-  age: undefined,
-  gender: undefined,
+const initialState = {
+  name: '',
+  age: '',
+  gender: '',
   location: {
-    longitude: undefined,
-    latitude: undefined,
+    longitude: '',
+    latitude: '',
   },
-  infected: false,
+  infected: '',
   inventory: {
-    water: undefined,
-    food: undefined,
-    medication: undefined,
-    ammunition: undefined,
+    water: '',
+    food: '',
+    medication: '',
+    ammunition: '',
   },
 };
 
-export const survivorContext = React.createContext(newSurvivor);
+const newSurvivor = cloneDeep(initialState);
+
+export const NewSurvivorContext = React.createContext(newSurvivor);
 
 const NewSurvivor = () => {
   const classes = useStyles();
@@ -40,12 +42,21 @@ const NewSurvivor = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = event => {
-    const obj = set({ ...survivor }, event.target.name, event.target.value);
-    setSurvivor(obj);
+    const currentSurvivor = set(
+      { ...survivor },
+      event.target.name,
+      event.target.value
+    );
+    setSurvivor(currentSurvivor);
   };
 
   const handleLoading = isLoading => {
     setIsLoading(isLoading);
+  };
+
+  const clearForm = event => {
+    const survivor = cloneDeep(initialState);
+    setSurvivor(survivor);
   };
 
   return (
@@ -59,11 +70,13 @@ const NewSurvivor = () => {
         <SurvivorProvider value={survivor}>
           <Grid container spacing={4}>
             <Grid item lg={7} md={6} xl={8} xs={12}>
-              <ResistenceForm
-                id="resistence-form"
+              {/* {JSON.stringify(initialState)} */}
+              <ResistanceForm
+                id="resistance-form"
                 survivor={survivor}
                 onChange={handleChange}
                 showLoading={handleLoading}
+                onReset={clearForm}
               />
             </Grid>
             <Grid item lg={5} md={6} xl={4} xs={12}>

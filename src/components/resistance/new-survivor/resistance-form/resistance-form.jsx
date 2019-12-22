@@ -21,7 +21,7 @@ import InventoryForm from '../inventory-form';
 import SecurityIcon from '@material-ui/icons/Security';
 import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
 import axios from 'axios';
-import { values } from 'lodash';
+import { values, capitalize } from 'lodash';
 import 'react-notifications/lib/notifications.css';
 import {
   NotificationContainer,
@@ -30,16 +30,23 @@ import {
 
 const useStyles = makeStyles(() => ({
   root: {},
+  align: {
+    justifyContent: 'flex-end',
+  },
 }));
 
-const ResistenceForm = props => {
-  const { className, onChange, ...rest } = props;
+const ResistanceForm = props => {
+  const { className, onChange, onReset, ...rest } = props;
   const survivor = useContext(SurvivorContext);
 
   const classes = useStyles();
 
   const handleChange = event => {
     onChange(event);
+  };
+
+  const onClearForm = event => {
+    onReset(event);
   };
 
   const resistanceTitle = (
@@ -53,7 +60,15 @@ const ResistenceForm = props => {
   const getParsedInventory = inventory => {
     if (!inventory) return '';
 
-    return `Water: ${inventory.water};Food: ${inventory.food};Medication: ${inventory.medication};Ammunition:${inventory.ammunition}`;
+    let parsedStr = '';
+    for (let [key, value] of Object.entries(inventory)) {
+      if (value) {
+        parsedStr = parsedStr + `${capitalize(key)}:${value};`;
+      }
+    }
+
+    // return `Water:${inventory.water}; Food: ${inventory.food}; Medication: ${inventory.medication};Ammunition:${inventory.ammunition}`;
+    return parsedStr.substr(0, parsedStr.length - 1);
   };
 
   const onSave = event => {
@@ -83,10 +98,12 @@ const ResistenceForm = props => {
             `Your resistance-number is: ${result.data.id}`,
             'Congratulations!'
           );
+
+          onClearForm(event);
         },
         error => {
           NotificationManager.error(
-            `Error: ${error.response.data}`,
+            `Error: ${JSON.stringify(error.response.data)}`,
             `Error saving record`
           );
         }
@@ -97,17 +114,18 @@ const ResistenceForm = props => {
   };
 
   const inventoryHasItems = inventory => {
-    return values(inventory).some(item => item !== undefined);
+    return values(inventory).some(item => item !== undefined && item !== '');
   };
 
   return (
     <SurvivorConsumer>
       {survivor => (
         <Card {...rest} className={clsx(classes.root, className)}>
+          {/* <pre>FORM SURVIVOR : {JSON.stringify(survivor, null, 2)}</pre> */}
           <form autoComplete="off" onSubmit={onSave}>
             <CardHeader
               title={resistanceTitle}
-              subheader="Add new survivor to the resistence"
+              subheader="Add new survivor to the resistance"
             />
             <Divider />
             <CardContent>
@@ -202,7 +220,8 @@ const ResistenceForm = props => {
               </Grid>
             </CardContent>
             <Divider />
-            <CardActions>
+            <CardActions className={classes.align}>
+              <Button onClick={onClearForm}>Clear</Button>
               <Button color="primary" variant="contained" type="submit">
                 Save
               </Button>
@@ -215,4 +234,4 @@ const ResistenceForm = props => {
   );
 };
 
-export default ResistenceForm;
+export default ResistanceForm;

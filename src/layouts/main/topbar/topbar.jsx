@@ -66,7 +66,7 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/add-for-resistence"
+            to="/add-for-resistance"
             startIcon={<PersonAddIcon />}
           >
             New Member
@@ -74,9 +74,8 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/edit-location"
+            to="/set-location"
             startIcon={<LocationOnIcon />}
-            disabled
           >
             Set Location
           </Button>

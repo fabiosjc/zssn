@@ -12,7 +12,7 @@
     ✔ [Requirement] Should save a new survivor @done(19-12-17 21:07)
     ✔ Change validation from inventory fields. Should use a 'at least one' validation. @done(19-12-17 23:00)
     ✔ Use notification on save/error @done(19-12-17 23:00)
-    ☐ [Improvement] Clear form after save
+    ✔ [Improvement] Clear form after save @done(19-12-22 17:35)
     ☐ [Improvement] Use a map to register lat/lon
     ☐ [Improvement] Add position image to last position field
 

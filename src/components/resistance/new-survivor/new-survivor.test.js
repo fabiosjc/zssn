@@ -13,6 +13,6 @@ test('should render component', () => {
   const component = wrapper.find('#new-survivor');
 
   expect(component.exists()).toBeTruthy();
-  expect(component.text().includes('ResistenceForm')).toBeTruthy();
+  expect(component.text().includes('ResistanceForm')).toBeTruthy();
   expect(component.text().includes('SurvivorProfile')).toBeTruthy();
 });

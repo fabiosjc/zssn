@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './app';
 
 test('redirect to new survivor page ', () => {
-  const redirectUrl = '/add-for-resistence';
+  const redirectUrl = '/add-for-resistance';
 
   const { container } = render(
     <MemoryRouter initialEntries={['/my/initial/route']}>
