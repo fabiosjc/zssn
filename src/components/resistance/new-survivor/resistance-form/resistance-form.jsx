@@ -23,10 +23,7 @@ import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
 import axios from 'axios';
 import { values, capitalize } from 'lodash';
 import 'react-notifications/lib/notifications.css';
-import {
-  NotificationContainer,
-  NotificationManager,
-} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -227,7 +224,6 @@ const ResistanceForm = props => {
               </Button>
             </CardActions>
           </form>
-          <NotificationContainer leaveTimeout={1500} />
         </Card>
       )}
     </SurvivorConsumer>

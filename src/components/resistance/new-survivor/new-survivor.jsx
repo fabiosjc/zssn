@@ -9,8 +9,7 @@ import LoadingOverlay from 'react-loading-overlay';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // padding: theme.spacing(4),
-    padding: 4,
+    padding: theme.spacing ? theme.spacing(4) : '',
   },
 }));
 

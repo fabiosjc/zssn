@@ -5,6 +5,10 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 import { useMediaQuery } from '@material-ui/core';
 import Topbar from './topbar/topbar';
 import Footer from './footer/footer';
+import {
+  NotificationContainer,
+  NotificationManager,
+} from 'react-notifications';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,6 +45,7 @@ const MainLayout = props => {
       <Topbar />
 
       <main className={classes.content}>
+        <NotificationContainer leaveTimeout={1500} />
         {children}
         <Footer />
       </main>

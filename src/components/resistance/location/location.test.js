@@ -13,5 +13,11 @@ test('should render component', () => {
   const component = wrapper.find('#location');
 
   expect(component.exists()).toBeTruthy();
-  expect(component.text().includes('Location')).toBeTruthy();
+
+  expect(
+    component
+      .find('.card-header')
+      .html()
+      .includes('Update Location')
+  ).toBeTruthy();
 });
