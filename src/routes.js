@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
-import { RouteWithLayout, NewSurvivor, Location } from './components';
+import { NewSurvivor, Location } from './components';
 import { MainLayout } from './layouts/';
+import RouteWithLayout from './route-with-layout';
 
 const Routes = () => {
   return (

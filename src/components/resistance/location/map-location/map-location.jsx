@@ -18,11 +18,26 @@ const styles = theme => ({
 class MapLocation extends Component {
   constructor(props) {
     super(props);
+
+    this.initialPosition = this.transformLonLat(props);
+
+    this.state = cloneDeep(this.initialPosition);
+
+    this.refmarker = React.createRef();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.lonlat !== this.props.lonlat) {
+      this.setState(this.transformLonLat(this.props));
+    }
+  }
+
+  transformLonLat = props => {
     const position = props.lonlat
       ? props.lonlat.match(/[-]{0,1}[\d]*[.]{0,1}[\d]+/g)
       : [];
 
-    this.initialPosition = {
+    return {
       lonlat: props.lonlat,
       center: {
         lat: this.getLatitude(position),
@@ -36,11 +51,7 @@ class MapLocation extends Component {
       draggable: true,
       survivor: props.survivor,
     };
-
-    this.state = cloneDeep(this.initialPosition);
-
-    this.refmarker = React.createRef();
-  }
+  };
 
   getLongitude = cordinates => {
     return cordinates && cordinates.length === 2 ? cordinates[0] : '';
@@ -56,6 +67,10 @@ class MapLocation extends Component {
       this.setState({
         marker: marker.leafletElement.getLatLng(),
       });
+
+      if (this.props.onDragMarker) {
+        this.props.onDragMarker(marker.leafletElement.getLatLng());
+      }
     }
   };
 
@@ -113,13 +128,13 @@ class MapLocation extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, showButtons = true } = this.props;
     const position = [this.state.center.lat, this.state.center.lng];
     const markerPosition = [this.state.marker.lat, this.state.marker.lng];
 
     return (
-      <div className={classes.root}>
-        <Grid id="map-location" container>
+      <div className={classes.root} id={this.props.id || 'map-location'}>
+        <Grid container spacing={4}>
           {/* <Grid item>{JSON.stringify(this.state, null, 2)}</Grid> */}
           <Grid item>
             <Typography component="span">
@@ -155,19 +170,26 @@ class MapLocation extends Component {
               {`Latitude: ${markerPosition[0]} | Longitude: ${markerPosition[1]}`}
             </Typography>
           </Grid>
-
-          <Button color="primary" onClick={this.cancelUpdate}>
-            Cancel
-          </Button>
-
-          <Button
-            color="primary"
-            variant="contained"
-            disabled={!this.isLocationChanged()}
-            onClick={this.savePosition}
-          >
-            Update
-          </Button>
+          {showButtons && (
+            <Grid item lg={6} md={6} xl={12} xs={12}>
+              <Button
+                color="primary"
+                onClick={this.cancelUpdate}
+                disabled={!this.isLocationChanged()}
+                variant="outlined"
+              >
+                Cancel
+              </Button>{' '}
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={!this.isLocationChanged()}
+                onClick={this.savePosition}
+              >
+                Update
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </div>
     );

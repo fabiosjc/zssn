@@ -63,7 +63,7 @@ const NewSurvivor = () => {
       active={isLoading}
       spinner
       text="Loading..."
-      className="height-100 overflow-hidden"
+      className="height-100"
     >
       <div id="new-survivor" className={classes.root}>
         <SurvivorProvider value={survivor}>

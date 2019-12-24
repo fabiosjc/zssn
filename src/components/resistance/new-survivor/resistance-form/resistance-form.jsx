@@ -1,4 +1,10 @@
-import React, { useContext, Fragment } from 'react';
+import React, {
+  useContext,
+  Fragment,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import clsx from 'clsx';
 import {
   Card,
@@ -21,9 +27,10 @@ import InventoryForm from '../inventory-form';
 import SecurityIcon from '@material-ui/icons/Security';
 import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
 import axios from 'axios';
-import { values, capitalize } from 'lodash';
+import { values, capitalize, debounce } from 'lodash';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
+import MapLocation from '../../location/map-location/map-location';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -35,11 +42,26 @@ const useStyles = makeStyles(() => ({
 const ResistanceForm = props => {
   const { className, onChange, onReset, ...rest } = props;
   const survivor = useContext(SurvivorContext);
+  const latInputRef = useRef();
+  const lonInputRef = useRef();
+  const [lonLat, setLonLat] = useState('-46.633308 -23.550520 ');
+  const debounceUpdatePosition = useCallback(debounce(setLonLat, 1000), []);
 
   const classes = useStyles();
 
   const handleChange = event => {
     onChange(event);
+  };
+
+  const handleLonLat = event => {
+    handleChange(event);
+
+    const lat = latInputRef.current.value;
+    const lon = lonInputRef.current.value;
+    const lonLat = `${lon} ${lat}`;
+
+    // Sync changes between Lat/Long Inputs and the Map, preventing multiple calls
+    debounceUpdatePosition(lonLat);
   };
 
   const onClearForm = event => {
@@ -113,6 +135,15 @@ const ResistanceForm = props => {
 
   const inventoryHasItems = inventory => {
     return values(inventory).some(item => item !== undefined && item !== '');
+  };
+
+  const updatePosition = location => {
+    handleChange({
+      target: { name: 'location.latitude', value: location.lat },
+    });
+    handleChange({
+      target: { name: 'location.longitude', value: location.lng },
+    });
   };
 
   return (
@@ -193,8 +224,9 @@ const ResistanceForm = props => {
                     variant="outlined"
                     margin="dense"
                     value={survivor.location.latitude}
-                    onChange={handleChange}
+                    onChange={handleLonLat}
                     type="number"
+                    inputRef={latInputRef}
                   />
                 </Grid>
                 <Grid item md={3} xs={12}>
@@ -206,9 +238,17 @@ const ResistanceForm = props => {
                     variant="outlined"
                     margin="dense"
                     value={survivor.location.longitude}
-                    onChange={handleChange}
+                    onChange={handleLonLat}
                     type="number"
+                    inputRef={lonInputRef}
                   />
+                </Grid>
+                <Grid item md={6} xs={12}>
+                  <MapLocation
+                    lonlat={lonLat}
+                    showButtons={false}
+                    onDragMarker={updatePosition}
+                  ></MapLocation>
                 </Grid>
 
                 <InventoryForm

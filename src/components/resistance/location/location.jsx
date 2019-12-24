@@ -9,28 +9,25 @@ import {
   CardHeader,
   Divider,
   InputAdornment,
-  Zoom,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
+  Collapse,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import { NotificationManager } from 'react-notifications';
 import LoadingOverlay from 'react-loading-overlay';
 import MapLocation from './map-location/map-location';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing ? theme.spacing(4) : '',
+    padding: theme.spacing ? theme.spacing(5) : '',
   },
   card: {
     padding: theme.spacing ? theme.spacing(3) : '',
   },
   iconTop: {
-    marginBottom: '1.4rem',
+    marginTop: '2rem',
   },
   container: {
     display: 'flex',
@@ -98,7 +95,7 @@ const Location = props => {
         active={isLoading}
         spinner
         text="Loading..."
-        className="height-100 overflow-hidden"
+        className="height-100"
       >
         <Card className={classes.card}>
           <Grid id="location" container>
@@ -109,8 +106,15 @@ const Location = props => {
                 className="card-header"
               />
               <Divider />
-              <Grid container alignItems="flex-end">
-                <Grid item lg={11} md={11} xs={11} className={classes.card}>
+              <Grid container>
+                <Grid
+                  item
+                  lg={5}
+                  md={5}
+                  xl={11}
+                  xs={11}
+                  className={classes.card}
+                >
                   <TextField
                     id="member-id"
                     name="survivorId"
@@ -133,48 +137,47 @@ const Location = props => {
                   />
                 </Grid>
                 <Grid
+                  item
                   lg={1}
                   md={1}
+                  xl={1}
                   xs={1}
-                  item
-                  alignContent={'center'}
-                  alignItems={'stretch'}
-                  direction={'column'}
+                  className={classes.iconTop}
                 >
                   <IconButton
                     id="search-btn"
-                    aria-label="delete"
+                    aria-label="search"
                     onClick={searchSurvivor}
                     size="medium"
                     edge={'start'}
-                    className={classes.iconTop}
                   >
                     <SearchIcon />
                   </IconButton>
                 </Grid>
+                <Grid
+                  item
+                  lg={6}
+                  md={12}
+                  xl={12}
+                  xs={12}
+                  className={classes.card}
+                >
+                  {survivor && (
+                    <div className={classes.container}>
+                      <Collapse in={survivor}>
+                        <Typography variant="h4" gutterBottom>
+                          Current Location
+                        </Typography>
+                        <MapLocation
+                          id="map-from-location"
+                          lonlat={survivor.lonlat}
+                          survivor={survivor}
+                        ></MapLocation>
+                      </Collapse>
+                    </div>
+                  )}
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item lg={12} md={12} xl={12} xs={12} className={classes.card}>
-              {survivor && (
-                <Zoom in={survivor}>
-                  <ExpansionPanel expanded={expanded} onChange={onToggle}>
-                    <ExpansionPanelSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      id="panel1a-header"
-                    >
-                      <Typography variant="h4" gutterBottom>
-                        Current Location
-                      </Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                      <MapLocation
-                        lonlat={survivor.lonlat}
-                        survivor={survivor}
-                      ></MapLocation>
-                    </ExpansionPanelDetails>
-                  </ExpansionPanel>
-                </Zoom>
-              )}
             </Grid>
           </Grid>
         </Card>

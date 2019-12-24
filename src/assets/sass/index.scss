@@ -31,7 +31,13 @@ a {
 }
 
 .leaflet-container {
+  height: 300px;
+  max-width: 500px;
+  border: 1px solid #03a9f4;
+}
+
+#map-from-location .leaflet-container {
   height: 400px;
-  width: 800px;
-  border: 4px solid yellowgreen;
+  max-width: 800px;
+  border: 1px solid #03a9f4;
 }
