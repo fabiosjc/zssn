@@ -8,32 +8,19 @@ import {
   Typography,
   CardHeader,
   Divider,
+  InputAdornment,
+  Zoom,
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
 } from '@material-ui/core';
-import { cloneDeep } from 'lodash';
 import { makeStyles } from '@material-ui/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SearchIcon from '@material-ui/icons/Search';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { NotificationManager } from 'react-notifications';
 import LoadingOverlay from 'react-loading-overlay';
-
-const initialState = {
-  name: '',
-  age: '',
-  gender: '',
-  location: {
-    longitude: '',
-    latitude: '',
-  },
-  infected: '',
-  inventory: {
-    water: '',
-    food: '',
-    medication: '',
-    ammunition: '',
-  },
-};
-
-const newSurvivor = cloneDeep(initialState);
+import MapLocation from './map-location/map-location';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,6 +28,12 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     padding: theme.spacing ? theme.spacing(3) : '',
+  },
+  iconTop: {
+    marginBottom: '1.4rem',
+  },
+  container: {
+    display: 'flex',
   },
 }));
 
@@ -56,6 +49,7 @@ const Location = props => {
   const [survivorId, setSurvivorId] = useState(null);
   const [survivor, setSurvivor] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [expanded, setExpanded] = React.useState(true);
 
   const classes = useStyles();
 
@@ -65,13 +59,15 @@ const Location = props => {
 
   const searchSurvivor = event => {
     if (!survivorId) {
-      NotificationManager.alert(
-        'Please inform the identification number to perform the action',
-        `Field is required`
+      NotificationManager.warning(
+        'Please inform the identification number to perform this action',
+        `Required field`
       );
+      return;
     }
 
     setIsLoading(true);
+    setSurvivor(null);
     axios
       .get(
         `http://zssn-backend-example.herokuapp.com/api/people/${survivorId}.json`
@@ -79,19 +75,21 @@ const Location = props => {
       .then(
         result => {
           let survivor = result.data;
-
           setSurvivor(survivor);
+          setIsLoading(false);
         },
         error => {
           NotificationManager.error(
             `Error: ${JSON.stringify(error.response.data)}`,
             `Member cannot be found.`
           );
+          setIsLoading(false);
         }
-      )
-      .finally(() => {
-        setIsLoading(false);
-      });
+      );
+  };
+
+  const onToggle = () => {
+    setExpanded(!expanded);
   };
 
   return (
@@ -107,47 +105,76 @@ const Location = props => {
             <Grid item lg={12} md={12} xl={12} xs={12}>
               <CardHeader
                 title={resistanceTitle}
-                subheader="Use the member identification to update the last location "
+                subheader="Use the member id to update their last location"
                 className="card-header"
               />
               <Divider />
-              <Grid container spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <AccountCircleIcon />
-                </Grid>
-                <Grid item md={6} xs={12}>
+              <Grid container alignItems="flex-end">
+                <Grid item lg={11} md={11} xs={11} className={classes.card}>
                   <TextField
                     id="member-id"
                     name="survivorId"
-                    label="Member Identification"
+                    label="Please inform the member id"
                     fullWidth={true}
-                    margin={'normal'}
-                    size={'medium'}
-                    type={'string'}
+                    margin="normal"
+                    size="medium"
+                    type="search"
                     onChange={handleChange}
+                    value={survivorId}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AccountCircleIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    variant={'outlined'}
+                    required
                   />
                 </Grid>
-                <Grid item>
+                <Grid
+                  lg={1}
+                  md={1}
+                  xs={1}
+                  item
+                  alignContent={'center'}
+                  alignItems={'stretch'}
+                  direction={'column'}
+                >
                   <IconButton
+                    id="search-btn"
                     aria-label="delete"
-                    size="small"
                     onClick={searchSurvivor}
+                    size="medium"
+                    edge={'start'}
+                    className={classes.iconTop}
                   >
                     <SearchIcon />
                   </IconButton>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item lg={7} md={6} xl={8} xs={12}>
+            <Grid item lg={12} md={12} xl={12} xs={12} className={classes.card}>
               {survivor && (
-                <div>
-                  Survivor:
-                  {JSON.stringify(survivor)}
-                </div>
+                <Zoom in={survivor}>
+                  <ExpansionPanel expanded={expanded} onChange={onToggle}>
+                    <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      id="panel1a-header"
+                    >
+                      <Typography variant="h4" gutterBottom>
+                        Current Location
+                      </Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <MapLocation
+                        lonlat={survivor.lonlat}
+                        survivor={survivor}
+                      ></MapLocation>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                </Zoom>
               )}
-            </Grid>
-            <Grid item lg={5} md={6} xl={4} xs={12}>
-              {/* <SurvivorProfile survivor={survivor} /> */}
             </Grid>
           </Grid>
         </Card>

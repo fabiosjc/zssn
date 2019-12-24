@@ -47,7 +47,7 @@ const MainLayout = props => {
       <main className={classes.content}>
         <NotificationContainer leaveTimeout={1500} />
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </div>
   );

@@ -70,11 +70,12 @@ const ResistanceForm = props => {
 
   const onSave = event => {
     event.preventDefault();
+    const { age, name, gender } = survivor;
     const person = {
-      name: survivor.name,
-      age: survivor.age,
-      gender: survivor.gender,
-      lonlat: `Point(${survivor.location.longitude}, ${survivor.location.latitude})`,
+      name,
+      age,
+      gender,
+      lonlat: `Point(${survivor.location.longitude} ${survivor.location.latitude})`,
       items: getParsedInventory(survivor.inventory),
     };
 

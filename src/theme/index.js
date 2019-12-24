@@ -3,6 +3,7 @@ import palette from './palette';
 import typography from './typography';
 
 const theme = createMuiTheme({
+  spacing: 4,
   palette,
   typography,
   zIndex: {
