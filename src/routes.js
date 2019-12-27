@@ -4,6 +4,7 @@ import { Switch, Redirect } from 'react-router-dom';
 import { NewSurvivor, Location } from './components';
 import { MainLayout } from './layouts/';
 import RouteWithLayout from './route-with-layout';
+import Account from './components/resistance/account/account';
 
 const Routes = () => {
   return (
@@ -22,6 +23,13 @@ const Routes = () => {
         layout={MainLayout}
         exact
         path="/set-location"
+      />
+
+      <RouteWithLayout
+        component={Account}
+        layout={MainLayout}
+        exact
+        path="/account"
       />
     </Switch>
   );

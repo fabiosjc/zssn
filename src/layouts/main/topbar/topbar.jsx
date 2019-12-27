@@ -82,9 +82,8 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/report-infection"
+            to="/account"
             startIcon={<ReportIcon />}
-            disabled
           >
             Report Infection
           </Button>
