@@ -18,6 +18,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { NotificationManager } from 'react-notifications';
 import LoadingOverlay from 'react-loading-overlay';
 import MapLocation from './map-location/map-location';
+import { REACT_APP_API_URL } from '../../../constants';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,24 +66,20 @@ const Location = props => {
 
     setIsLoading(true);
     setSurvivor(null);
-    axios
-      .get(
-        `http://zssn-backend-example.herokuapp.com/api/people/${survivorId}.json`
-      )
-      .then(
-        result => {
-          let survivor = result.data;
-          setSurvivor(survivor);
-          setIsLoading(false);
-        },
-        error => {
-          NotificationManager.error(
-            `Error: ${JSON.stringify(error.response.data)}`,
-            `Member cannot be found.`
-          );
-          setIsLoading(false);
-        }
-      );
+    axios.get(`${REACT_APP_API_URL}/api/people/${survivorId}.json`).then(
+      result => {
+        let survivor = result.data;
+        setSurvivor(survivor);
+        setIsLoading(false);
+      },
+      error => {
+        NotificationManager.error(
+          `Error: ${JSON.stringify(error.response.data)}`,
+          `Member cannot be found.`
+        );
+        setIsLoading(false);
+      }
+    );
   };
 
   const onToggle = () => {

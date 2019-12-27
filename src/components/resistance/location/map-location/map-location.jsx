@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/styles';
 import { cloneDeep } from 'lodash';
 import { NotificationManager } from 'react-notifications';
 import axios from 'axios';
+import { REACT_APP_API_URL } from '../../../../constants';
 
 const styles = theme => ({
   root: {
@@ -105,10 +106,7 @@ class MapLocation extends Component {
     }
 
     axios
-      .patch(
-        `http://zssn-backend-example.herokuapp.com/api/people/${survivorId}.json`,
-        person
-      )
+      .patch(`${REACT_APP_API_URL}/api/people/${survivorId}.json`, person)
       .then(
         result => {
           NotificationManager.success(

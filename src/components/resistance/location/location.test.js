@@ -3,6 +3,7 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Location from './location';
 import mockAxios from 'jest-mock-axios';
+import { REACT_APP_API_URL } from '../../../constants';
 
 jest.mock('react-notifications');
 
@@ -58,7 +59,7 @@ describe('<Location />', () => {
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(
-      `http://zssn-backend-example.herokuapp.com/api/people/1234.json`
+      `${REACT_APP_API_URL}/api/people/1234.json`
     );
   });
 

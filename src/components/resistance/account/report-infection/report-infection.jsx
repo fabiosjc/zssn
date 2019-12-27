@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBiohazard } from '@fortawesome/free-solid-svg-icons';
 import { NotificationManager } from 'react-notifications';
 import axios from 'axios';
+import { REACT_APP_API_URL } from '../../../../constants';
 
 export default function ReportInfection(props) {
   // const [open, setOpen] = React.useState(false);
@@ -43,7 +44,7 @@ export default function ReportInfection(props) {
     setIsLoading(true);
     axios
       .post(
-        `http://zssn-backend-example.herokuapp.com/api/people/${resistanceId}/report_infection.json`,
+        `${REACT_APP_API_URL}/api/people/${resistanceId}/report_infection.json`,
         {
           infected: infectedId,
           id: resistanceId,
@@ -71,55 +72,54 @@ export default function ReportInfection(props) {
   };
 
   return (
-    <div>
-      <Dialog
-        open={props.open}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        <DialogTitle id="form-dialog-title">Report Infection</DialogTitle>
-        <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="infected"
-            label="Infected Member"
-            type="text"
-            fullWidth
-            disabled
-            defaultValue={name}
-            value={name}
-          />
-          <Divider />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="resistanceId"
-            label="Your Resistance Id"
-            type="text"
-            fullWidth
-            false
-            helperText="You must enter your resistance id for this operation"
-            onChange={handleChange}
-            value={resistanceId}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            endIcon={<FontAwesomeIcon icon={faBiohazard} />}
-            disabled={!resistanceId.trim()}
-            onClick={onReportInfection}
-          >
-            Report
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <Dialog
+      open={props.open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      maxWidth={'sm'}
+      fullWidth={true}
+    >
+      <DialogTitle id="form-dialog-title">Report Infection</DialogTitle>
+      <DialogContent>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="infected"
+          label="Infected Member"
+          type="text"
+          fullWidth
+          disabled
+          defaultValue={name}
+          value={name}
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="resistanceId"
+          label="Your Resistance Id"
+          type="text"
+          fullWidth
+          false
+          helperText="You must enter your resistance id for this operation"
+          onChange={handleChange}
+          value={resistanceId}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancel
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          endIcon={<FontAwesomeIcon icon={faBiohazard} />}
+          disabled={!resistanceId.trim()}
+          onClick={onReportInfection}
+        >
+          Report
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 }

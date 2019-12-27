@@ -17,6 +17,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ResistanceTableList from './resistance-table-list.jsx/';
 import axios from 'axios';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
+import { REACT_APP_API_URL } from '../../../constants/';
 
 const styles = theme => ({
   root: {
@@ -43,8 +44,7 @@ const styles = theme => ({
   },
 });
 
-const searchAPI = () =>
-  axios.get(`http://zssn-backend-example.herokuapp.com/api/people.json`);
+const searchAPI = () => axios.get(`${REACT_APP_API_URL}/api/people.json`);
 
 const searchAPIDebounced = AwesomeDebouncePromise(searchAPI, 400);
 

@@ -31,6 +31,7 @@ import { values, capitalize, debounce } from 'lodash';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
 import MapLocation from '../../location/map-location/map-location';
+import { REACT_APP_API_URL } from '../../../../constants';
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -111,7 +112,7 @@ const ResistanceForm = props => {
 
     props.showLoading(true);
     axios
-      .post('http://zssn-backend-example.herokuapp.com/api/people.json', person)
+      .post(`${REACT_APP_API_URL}/api/people.json`, person)
       .then(
         result => {
           NotificationManager.success(

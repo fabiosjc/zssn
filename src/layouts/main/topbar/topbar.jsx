@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -6,13 +6,10 @@ import { makeStyles } from '@material-ui/styles';
 import {
   AppBar,
   Toolbar,
-  Badge,
-  Hidden,
   IconButton,
   Typography,
   Button,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ReportIcon from '@material-ui/icons/Report';
@@ -21,6 +18,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SwapHorizontalCircleIcon from '@material-ui/icons/SwapHorizontalCircle';
 import InfoIcon from '@material-ui/icons/Info';
 import { Link } from 'react-router-dom';
+import { REACT_APP_NAME } from '../../../constants';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +55,7 @@ const Topbar = props => {
             <WifiTetheringIcon />
           </IconButton>
           <Typography variant="h4" className={classes.title} color="inherit">
-            ZSSN - Zombie Survival Social Network
+            {REACT_APP_NAME}
           </Typography>
         </RouterLink>
         <div className={classes.flexGrow} />
