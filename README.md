@@ -1,7 +1,9 @@
-# ZSSN (Zombie Survival Social Network) - Frontend
+# ZSSN (Zombie Survival Social Network) - Frontend [![CircleCI](https://circleci.com/gh/fabiosjc/zssn.svg?style=svg)](https://circleci.com/gh/fabiosjc/zssn)
 
 This project is an implentation of the ZSSN (Zombie Survival Social Network)
 challenge.
+
+Demo: https://fabiosjc-zssn.netlify.com
 
 ## Problem Description
 
