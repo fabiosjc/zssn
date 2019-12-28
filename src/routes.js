@@ -5,6 +5,7 @@ import { NewSurvivor, Location } from './components';
 import { MainLayout } from './layouts/';
 import RouteWithLayout from './route-with-layout';
 import Account from './components/resistance/account/account';
+import About from './components/about';
 
 const Routes = () => {
   return (
@@ -30,6 +31,13 @@ const Routes = () => {
         layout={MainLayout}
         exact
         path="/account"
+      />
+
+      <RouteWithLayout
+        component={About}
+        layout={MainLayout}
+        exact
+        path="/about"
       />
     </Switch>
   );

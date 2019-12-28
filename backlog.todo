@@ -1,6 +1,6 @@
 
 # Project settings:
-  ☐ Deploy on heroku/netlify
+  ✔ Deploy on heroku/netlify @done(19-12-28 00:35)
   ☐ Use CI
   ✔ Add linter @done(19-12-17 21:06)
   ✔ Add prettier @done(19-12-17 21:06)
@@ -32,3 +32,6 @@
 # Reports Module
   # Reports:
     ☐ [Requirement] Create report/dashboard
+
+# About
+  ✔ [Bonus] Create about page @done(19-12-28 00:34)

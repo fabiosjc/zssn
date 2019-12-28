@@ -22,7 +22,7 @@ import { REACT_APP_NAME } from '../../../constants';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // background: '#277cb0',
+    background: '#016992',
   },
   flexGrow: {
     flexGrow: 1,
@@ -106,9 +106,8 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/home"
+            to="/about"
             startIcon={<InfoIcon />}
-            disabled
           >
             About
           </Button>
