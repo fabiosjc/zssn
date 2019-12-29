@@ -8,7 +8,7 @@ const Gender = props => {
   return (
     <Fragment>
       {value === 'M' ? (
-        <FontAwesomeIcon icon={faMars} color="blue" size="lg" />
+        <FontAwesomeIcon icon={faMars} color="#1696c9" size="lg" />
       ) : value === 'F' ? (
         <FontAwesomeIcon icon={faVenus} color="deeppink" size="lg" />
       ) : (

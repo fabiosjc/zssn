@@ -26,6 +26,15 @@ import ReportInfection from '../report-infection';
 
 const useStyles = makeStyles(theme => ({
   root: {},
+  paper: {
+    marginTop: 20,
+  },
+  table: {
+    minWidth: 650,
+    '& .MuiTableCell-root': {
+      padding: '10px 16px',
+    },
+  },
   content: {
     padding: 0,
   },
@@ -47,16 +56,31 @@ const useStyles = makeStyles(theme => ({
       color: '#3f51b5',
     },
   },
+  tableHeader: {
+    '& th': {
+      fontSize: 16,
+      background: '#fafafa',
+    },
+    '& .MuiTableCell-root': {
+      borderColor: '#ddd',
+    },
+  },
+
+  tableBody: {
+    '& td': {
+      // borderColor: '#eee',
+    },
+    '& .MuiIconButton-root': {
+      padding: 10,
+    },
+  },
 }));
 
 const ResistanceTableList = props => {
-  const { className, list, ...rest } = props;
   const [open, setOpen] = React.useState(false);
   const [infectedPerson, setInfectedPerson] = React.useState(null);
-
-  const rows = list;
-
   const classes = useStyles();
+  const rows = props.list;
 
   const showReportInfectionModal = (event, survivor) => {
     setOpen(true);
@@ -68,34 +92,22 @@ const ResistanceTableList = props => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.paper}>
       <Table className={classes.table} aria-label="simple table">
-        <TableHead>
+        <TableHead className={classes.tableHeader}>
           <TableRow>
-            <TableCell>
-              <Typography variant="body1">Name</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="body1">Age</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="body1">Gender</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="body1">Location</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="body1">Infected?</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="body1">Actions</Typography>
-            </TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Age</TableCell>
+            <TableCell>Gender</TableCell>
+            <TableCell>Location</TableCell>
+            <TableCell>Infected?</TableCell>
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className={classes.tableBody}>
           {rows.map(row => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+            <TableRow key={row.name} hover>
+              <TableCell>
                 <Typography variant="body1">{row.name}</Typography>
               </TableCell>
               <TableCell>
@@ -110,15 +122,10 @@ const ResistanceTableList = props => {
                 <Typography variant="body1">{row.lonlat}</Typography>
               </TableCell>
               <TableCell>
-                {/* <FontAwesomeIcon
-                  icon={faBiohazard}
-                  size="2x"
-                  color={row['infected?'] ? 'red' : '#ccc'}
-                /> */}
                 {row['infected?'] ? (
-                  <CheckIcon color="primary" />
+                  <CheckIcon color="primary" fontSize={'small'} />
                 ) : (
-                  <ClearIcon color="error" />
+                  <ClearIcon color="error" fontSize={'small'} />
                 )}
               </TableCell>
               <TableCell>
@@ -131,7 +138,6 @@ const ResistanceTableList = props => {
                     disabled={row['infected?'] ? true : false}
                     onClick={event => showReportInfectionModal(event, row)}
                   >
-                    {/* <FontAwesomeIcon icon={faBiohazard} /> */}
                     <FlagIcon />
                   </IconButton>
                 }
