@@ -114,12 +114,12 @@ const Dashboard = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
-        <Grid item lg={6} md={6} xl={3} xs={12}>
+        <Grid item xs={12} lg={6} md={6} xl={6}>
           <WarPercentage />
         </Grid>
-        <Grid item lg={6} md={6} xl={3} xs={12}>
+        <Grid item xs={12} lg={6} md={6} xl={6}>
           <Grid container spacing={10}>
-            <Grid item lg={6} sm={6} xl={3} xs={12}>
+            <Grid item lg={6} md={6} xl={6} sm={6} xs={12}>
               <MiniCard
                 resource={'Water'}
                 icon={<InvertColorsIcon />}
@@ -127,7 +127,7 @@ const Dashboard = () => {
                 amount={getTotalOfResources('water')}
               />
             </Grid>
-            <Grid item lg={6} sm={6} xl={3} xs={12}>
+            <Grid item lg={6} md={6} xl={6} sm={6} xs={12}>
               <MiniCard
                 resource={'Food'}
                 icon={<RestaurantIcon />}
@@ -135,7 +135,7 @@ const Dashboard = () => {
                 amount={getTotalOfResources('food')}
               />
             </Grid>
-            <Grid item lg={6} sm={6} xl={3} xs={12}>
+            <Grid item lg={6} md={6} xl={6} sm={6} xs={12}>
               <MiniCard
                 resource={'Medication'}
                 icon={<LocalHospitalIcon />}
@@ -143,7 +143,7 @@ const Dashboard = () => {
                 amount={getTotalOfResources('medication')}
               />
             </Grid>
-            <Grid item lg={6} sm={6} xl={3} xs={12}>
+            <Grid item lg={6} md={6} xl={6} sm={6} xs={12}>
               <MiniCard
                 resource={'Ammunition'}
                 icon={<GavelIcon />}
@@ -151,7 +151,7 @@ const Dashboard = () => {
                 amount={getTotalOfResources('ammunition')}
               />
             </Grid>
-            <Grid item lg={6} sm={6} xl={3} xs={12}>
+            <Grid item lg={6} md={6} xl={6} sm={6} xs={12}>
               <LostPoints />
             </Grid>
           </Grid>
