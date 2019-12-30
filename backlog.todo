@@ -1,7 +1,6 @@
-
 # Project settings:
   ✔ Deploy on heroku/netlify @done(19-12-28 00:35)
-  ☐ Use CI
+  ✔ Use CI @done(19-12-30 07:52)
   ✔ Add linter @done(19-12-17 21:06)
   ✔ Add prettier @done(19-12-17 21:06)
   ✔ Add coverage @done(19-12-17 21:06)
@@ -14,7 +13,6 @@
     ✔ Use notification on save/error @done(19-12-17 23:00)
     ✔ [Improvement] Clear form after save @done(19-12-22 17:35)
     ✔ [Improvement] Use a map to register lat/lon @done(19-12-27 04:39)
-    ☐ [Improvement] Add position image to last position field
 
   # Update survivor location:
     ✔ [Requirement] Should update survivor location @done(19-12-27 04:40)

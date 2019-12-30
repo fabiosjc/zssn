@@ -42,7 +42,7 @@ const Dashboard = () => {
   const [resourcesAmount, setResourcesAmount] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const calculateAverageOfResources = async () => {
       const result = await fetchAllSurvivors();
       const allUninfecteds = getUninfecteds(result.data);
       setUninfecteds(allUninfecteds);
@@ -54,36 +54,37 @@ const Dashboard = () => {
         promises.push(inventoryResult);
       });
 
-      let allInventoriesPromises = await Promise.all(promises);
+      const allInventoriesPromises = await Promise.all(promises);
+      const inventories = allInventoriesPromises.map(item => item.data);
+      const amountByResource = getAmountByResources(inventories);
+      setResourcesAmount(amountByResource);
+    };
 
-      let allInventories = allInventoriesPromises.map(item => item.data);
+    const getAmountByResources = inventories => {
+      let amount = { water: 0, food: 0, ammunition: 0, medication: 0 };
 
-      let amount = {
-        water: 0,
-        food: 0,
-        ammunition: 0,
-        medication: 0,
-      };
-
-      allInventories.forEach(inventory => {
+      inventories.forEach(inventory => {
         inventory.forEach(resource => {
-          if (resource.item.name === 'Water') {
-            amount.water = amount.water + resource.quantity;
-          } else if (resource.item.name === 'Food') {
-            amount.food = amount.food + resource.quantity;
-          } else if (resource.item.name === 'Medication') {
-            amount.medication = amount.medication + resource.quantity;
-          } else if (resource.item.name === 'Ammunition') {
-            amount.ammunition = amount.ammunition + resource.quantity;
-          }
+          sumItemsByResource(amount, resource, 'Water');
+          sumItemsByResource(amount, resource, 'Food');
+          sumItemsByResource(amount, resource, 'Medication');
+          sumItemsByResource(amount, resource, 'Ammunition');
         });
       });
 
-      setResourcesAmount(amount);
+      return amount;
     };
 
-    fetchData();
+    calculateAverageOfResources();
   }, []);
+
+  const sumItemsByResource = (amount, resource, itemName) => {
+    if (resource.item.name !== itemName) {
+      return;
+    }
+
+    return (amount[itemName.toLowerCase()] += resource.quantity);
+  };
 
   const fetchAllSurvivors = () => {
     return axios.get(`${REACT_APP_API_URL}/api/people.json`);
