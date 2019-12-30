@@ -23,7 +23,7 @@
     ✔ [Requirement] Flag survivor as infected @done(19-12-27 04:40)
 
   # Survivors cannot Add/Remove items from inventory:
-    ☐ [Requirement] Survivors cannot Add/Remove items from inventory
+    ✔ [Requirement] Survivors cannot Add/Remove items from inventory @done(19-12-30 06:22)
 
 # Trade Module
   # Trade items:
@@ -31,7 +31,7 @@
 
 # Reports Module
   # Reports:
-    ☐ [Requirement] Create report/dashboard
+    ✔ [Requirement] Create report/dashboard @done(19-12-30 06:22)
 
 # About
   ✔ [Bonus] Create about page @done(19-12-28 00:34)

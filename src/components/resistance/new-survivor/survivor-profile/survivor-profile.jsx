@@ -30,6 +30,10 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0,
     flexGrow: 0,
   },
+  wrapIcon: {
+    verticalAlign: 'middle',
+    display: 'inline-flex',
+  },
 }));
 
 const SurvivorProfile = props => {
@@ -86,26 +90,42 @@ const SurvivorProfile = props => {
                 <Typography variant="h4">Inventory</Typography>
               </Grid>
               <Grid item md={6} xs={12}>
-                <InvertColorsIcon />
-                <Typography color="textSecondary" variant="p" component="span">
+                <Typography
+                  color="textSecondary"
+                  variant="subtitle1"
+                  className={classes.wrapIcon}
+                >
+                  <InvertColorsIcon />
                   Water: {survivor.inventory.water}
                 </Typography>
               </Grid>
               <Grid item md={6} xs={12}>
-                <RestaurantIcon />
-                <Typography color="textSecondary" variant="p" component="span">
+                <Typography
+                  color="textSecondary"
+                  variant="subtitle1"
+                  className={classes.wrapIcon}
+                >
+                  <RestaurantIcon />
                   Food: {survivor.inventory.food}
                 </Typography>
               </Grid>
               <Grid item md={6} xs={12}>
-                <LocalHospitalIcon />
-                <Typography color="textSecondary" variant="p" component="span">
+                <Typography
+                  color="textSecondary"
+                  variant="subtitle1"
+                  className={classes.wrapIcon}
+                >
+                  <LocalHospitalIcon />
                   Medication: {survivor.inventory.medication}
                 </Typography>
               </Grid>
               <Grid item md={6} xs={12}>
-                <GavelIcon />
-                <Typography color="textSecondary" variant="p" component="span">
+                <Typography
+                  color="textSecondary"
+                  variant="subtitle1"
+                  className={classes.wrapIcon}
+                >
+                  <GavelIcon />
                   Ammunition: {survivor.inventory.ammunition}
                 </Typography>
               </Grid>

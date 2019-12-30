@@ -6,6 +6,7 @@ import { MainLayout } from './layouts/';
 import RouteWithLayout from './route-with-layout';
 import Account from './components/resistance/account/account';
 import About from './components/about';
+import Dashboard from './components/reports';
 
 const Routes = () => {
   return (
@@ -31,6 +32,13 @@ const Routes = () => {
         layout={MainLayout}
         exact
         path="/account"
+      />
+
+      <RouteWithLayout
+        component={Dashboard}
+        layout={MainLayout}
+        exact
+        path="/dashboard"
       />
 
       <RouteWithLayout

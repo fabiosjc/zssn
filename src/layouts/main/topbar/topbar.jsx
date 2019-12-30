@@ -88,7 +88,7 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/report-infection"
+            to="/trade"
             startIcon={<SwapHorizontalCircleIcon />}
             disabled
           >
@@ -97,9 +97,8 @@ const Topbar = props => {
           <Button
             color="inherit"
             component={Link}
-            to="/report-infection"
+            to="/dashboard"
             startIcon={<DashboardIcon />}
-            disabled
           >
             Dashboard
           </Button>
