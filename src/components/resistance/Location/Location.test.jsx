@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Location from './location';
+import Location from './Location';
 import mockAxios from 'jest-mock-axios';
 import { REACT_APP_API_URL } from '../../../constants';
 

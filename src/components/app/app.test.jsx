@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import App from './app';
+import App from './App';
 
 test('redirect to new survivor page ', () => {
   const redirectUrl = '/add-for-resistance';

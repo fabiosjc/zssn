@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import SurvivorProfile from './survivor-profile';
-import ResistanceForm from './resistance-form';
-import { SurvivorProvider } from './survivor-context';
+import SurvivorProfile from './SurvivorProfile';
+import ResistanceForm from './ResistanceForm';
+import { SurvivorProvider } from './SurvivorContext';
 import { set, cloneDeep } from 'lodash';
 import LoadingOverlay from 'react-loading-overlay';
 

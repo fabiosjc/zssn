@@ -23,14 +23,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import InventoryForm from '../inventory-form';
+import InventoryForm from '../InventoryForm';
 import SecurityIcon from '@material-ui/icons/Security';
-import SurvivorContext, { SurvivorConsumer } from '../survivor-context';
+import SurvivorContext, { SurvivorConsumer } from '../SurvivorContext';
 import axios from 'axios';
 import { values, capitalize, debounce } from 'lodash';
 import 'react-notifications/lib/notifications.css';
 import { NotificationManager } from 'react-notifications';
-import MapLocation from '../../location/map-location/map-location';
+import MapLocation from '../../Location/MapLlocation';
 import { REACT_APP_API_URL } from '../../../../constants';
 
 const useStyles = makeStyles(() => ({

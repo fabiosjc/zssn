@@ -16,7 +16,7 @@ import GavelIcon from '@material-ui/icons/Gavel';
 
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
-import { SurvivorConsumer } from '../survivor-context';
+import { SurvivorConsumer } from '../SurvivorContext';
 
 const useStyles = makeStyles(theme => ({
   root: {},

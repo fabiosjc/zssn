@@ -17,7 +17,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import { NotificationManager } from 'react-notifications';
 import LoadingOverlay from 'react-loading-overlay';
-import MapLocation from './map-location/map-location';
+import MapLocation from './MapLlocation/';
 import { REACT_APP_API_URL } from '../../../constants';
 
 const useStyles = makeStyles(theme => ({

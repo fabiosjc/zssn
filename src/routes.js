@@ -3,8 +3,8 @@ import { Switch, Redirect } from 'react-router-dom';
 
 import { NewSurvivor, Location } from './components';
 import { MainLayout } from './layouts/';
-import RouteWithLayout from './route-with-layout';
-import Account from './components/resistance/account/account';
+import RouteWithLayout from './RouteWithLayout';
+import Account from './components/resistance/Account/Account';
 import About from './components/about';
 import Dashboard from './components/reports';
 

@@ -14,10 +14,10 @@ import { withStyles } from '@material-ui/styles';
 
 import SecurityIcon from '@material-ui/icons/Security';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ResistanceTableList from './resistance-table-list.jsx/';
+import ResistanceTableList from './ResistanceTableList';
 import axios from 'axios';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import { REACT_APP_API_URL } from '../../../constants/';
+import { REACT_APP_API_URL } from '../../../constants';
 
 const styles = theme => ({
   root: {

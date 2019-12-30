@@ -1,2 +1,2 @@
-export { default as NewSurvivor } from './resistance/new-survivor';
-export { default as Location } from './resistance/location';
+export { default as NewSurvivor } from './resistance/NewSurvivor';
+export { default as Location } from './resistance/Location';

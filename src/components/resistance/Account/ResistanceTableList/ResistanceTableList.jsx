@@ -7,22 +7,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBiohazard, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import { IconButton, Typography } from '@material-ui/core';
-import AlarmIcon from '@material-ui/icons/Alarm';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import PinDropIcon from '@material-ui/icons/PinDrop';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import AddAlertIcon from '@material-ui/icons/AddAlert';
 import CheckIcon from '@material-ui/icons/Check';
-import RemoveIcon from '@material-ui/icons/Remove';
 import FlagIcon from '@material-ui/icons/Flag';
-import Gender from '../../gender';
-import Button from '@material-ui/core/Button';
-import EditIcon from '@material-ui/icons/Edit';
+import Gender from '../../Gender';
 import ClearIcon from '@material-ui/icons/Clear';
-import ReportInfection from '../report-infection';
+import ReportInfection from '../ReportInfection';
 
 const useStyles = makeStyles(theme => ({
   root: {},
