@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -48,12 +48,12 @@ const LostPoints = props => {
       });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchTotalPointsLost();
   }, []);
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
+    <Card id="lost-points" {...rest} className={clsx(classes.root, className)}>
       <CardContent>
         <Grid container justify="space-between">
           <Grid item>
@@ -65,7 +65,7 @@ const LostPoints = props => {
             >
               TOTAL POINTS LOST
             </Typography>
-            <Typography color="inherit" variant="h3">
+            <Typography id="total-points-value" color="inherit" variant="h3">
               {totalPointsLost}
             </Typography>
           </Grid>
