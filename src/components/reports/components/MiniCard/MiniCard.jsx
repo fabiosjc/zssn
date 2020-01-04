@@ -44,7 +44,7 @@ const MiniCard = props => {
   const classes = useStyles(props);
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
+    <Card id="mini-card" {...rest} className={clsx(classes.root, className)}>
       <CardContent>
         <Grid container justify="space-between">
           <Grid item>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { mount, shallow, configure } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import { MuiThemeProvider } from '@material-ui/core';
 
 import Adapter from 'enzyme-adapter-react-16';
 import mockAxios from 'jest-mock-axios';
