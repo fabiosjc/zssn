@@ -47,11 +47,11 @@ const WarPercentage = props => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const fetchAverages = ({
+  const fetchAverages = async ({
     averageType = 'infected',
     averageField = 'average_infected',
   }) => {
-    axios
+    await axios
       .get(`${REACT_APP_API_URL}/api/report/${averageType}.json`)
       .then(result => {
         let average = get(result, `data.report.${averageField}`, 0);
@@ -61,23 +61,29 @@ const WarPercentage = props => {
       });
   };
 
-  fetchAverages({ averageType: 'infected', averageField: 'average_infected' });
-  fetchAverages({
-    averageType: 'non_infected',
-    averageField: 'average_healthy',
-  });
+  React.useEffect(() => {
+    fetchAverages({
+      averageType: 'infected',
+      averageField: 'average_infected',
+    });
+
+    fetchAverages({
+      averageType: 'non_infected',
+      averageField: 'average_healthy',
+    });
+  }, []);
 
   const data = {
     datasets: [
       {
         data: [averageNonInfected, averageInfected],
         backgroundColor: [
-          theme.palette.primary.main,
-          theme.palette.warning.main,
+          theme ? theme.palette.primary.main : 'darkblue',
+          theme ? theme.palette.warning.main : 'orange',
         ],
         borderWidth: 8,
-        borderColor: theme.palette.white,
-        hoverBorderColor: theme.palette.white,
+        borderColor: theme ? theme.palette.white : 'white',
+        hoverBorderColor: theme ? theme.palette.white : 'white',
       },
     ],
     labels: ['Resistance', 'Infected'],
@@ -97,11 +103,11 @@ const WarPercentage = props => {
       mode: 'index',
       intersect: false,
       borderWidth: 1,
-      borderColor: theme.palette.divider,
-      backgroundColor: theme.palette.white,
-      titleFontColor: theme.palette.text.primary,
-      bodyFontColor: theme.palette.text.secondary,
-      footerFontColor: theme.palette.text.secondary,
+      borderColor: theme ? theme.palette.divider : 'white',
+      backgroundColor: theme ? theme.palette.white : 'white',
+      titleFontColor: theme ? theme.palette.text.primary : 'white',
+      bodyFontColor: theme ? theme.palette.text.secondary : 'white',
+      footerFontColor: theme ? theme.palette.text.secondary : 'white',
     },
   };
 
@@ -110,18 +116,22 @@ const WarPercentage = props => {
       title: 'Resistance',
       value: averageNonInfected,
       icon: <FontAwesomeIcon icon={faUserShield} />,
-      color: theme.palette.primary.main,
+      color: theme ? theme.palette.primary.main : '',
     },
     {
       title: 'Infecteds',
       value: averageInfected,
       icon: <FontAwesomeIcon icon={faBiohazard} />,
-      color: theme.palette.warning.main,
+      color: theme ? theme.palette.warning.main : '',
     },
   ];
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
+    <Card
+      id="war-percentage"
+      {...rest}
+      className={clsx(classes.root, className)}
+    >
       <CardHeader
         action={
           <IconButton size="small">
